@@ -17,3 +17,21 @@ export const register = async(dispatch, formData) => {
         //TODO: REGISTER_FAILURE
     }
 }
+
+export const login = async(dispatch, formData) => {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/auth/login`, {
+        credentials: 'include',
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const parsedResponse = await response.json();
+    if(parsedResponse.status === 200){
+        dispatch({
+            type: "LOGIN",
+            payload: parsedResponse.data
+        })
+    }
+}
