@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { register } from '../reduxStuff/actions/authActions';
 
 class AuthGateway extends Component{
     constructor(){
@@ -59,4 +61,10 @@ class AuthGateway extends Component{
     }
 }
 
-export default AuthGateway;
+const mapDispatchToProps = (dispatch) => {
+    return{
+        register: (formData) => { register(dispatch, formData)}
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AuthGateway);
